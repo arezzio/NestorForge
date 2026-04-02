@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Nestor Forge — AI Consulting and Training for Small Business</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --navy-deep:   #1B2047;
+  --navy-mid:    #2D3470;
+  --navy-light:  #3D4A5C;
+  --gold:        #B8952A;
+  --gold-light:  #D4AE45;
+  --gray-warm:   #C4BDB5;
+  --gray-light:  #EDEAE5;
+  --white:       #FFFFFF;
+  --text-muted:  #6B7A90;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'DM Sans', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); background: var(--gray-light); color: var(--navy-deep); overflow-x: hidden; }
+
+/* NAV */
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 52px; height: 76px; background: var(--navy-deep); border-bottom: 1px solid rgba(184,149,42,0.25); }
+.nav-logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+.nav-wordmark { display: flex; flex-direction: column; line-height: 1; gap: 2px; }
+.nav-nestor { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--white); letter-spacing: 3px; text-transform: uppercase; }
+.nav-forge { font-family: var(--font-display); font-size: 11px; font-weight: 400; color: var(--gold); letter-spacing: 4px; text-transform: uppercase; display: flex; align-items: center; gap: 5px; }
+.nav-forge::before, .nav-forge::after { content: '—'; opacity: 0.5; font-size: 9px; }
+.nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+.nav-links a { font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.55); text-decoration: none; letter-spacing: 1px; text-transform: uppercase; transition: color 0.2s; }
+.nav-links a:hover { color: var(--gold); }
+.nav-cta { background: var(--gold) !important; color: var(--navy-deep) !important; padding: 10px 22px; border-radius: 2px; font-weight: 600 !important; }
+.nav-cta:hover { background: var(--gold-light) !important; color: var(--navy-deep) !important; }
+
+/* HERO */
+#hero { min-height: 100vh; background: var(--navy-deep); display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; padding-top: 76px; }
+.hero-pattern { position: absolute; inset: 0; background-image: linear-gradient(rgba(184,149,42,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(184,149,42,0.04) 1px, transparent 1px); background-size: 56px 56px; animation: drift 24s linear infinite; }
+@keyframes drift { from { transform: translateY(0); } to { transform: translateY(56px); } }
+.hero-glow { position: absolute; width: 900px; height: 900px; background: radial-gradient(circle, rgba(23,36,66,0.8) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
+.hero-inner { position: relative; z-index: 2; width: 100%; max-width: 1240px; margin: 0 auto; padding: 80px 52px 60px; text-align: center; }
+.hero-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 32px; display: flex; align-items: center; justify-content: center; gap: 12px; }
+.hero-eyebrow::before, .hero-eyebrow::after { content: ''; width: 28px; height: 1px; background: var(--gold); }
+.hero-headline { font-family: var(--font-display); font-size: clamp(52px, 7vw, 96px); font-weight: 700; line-height: 1.02; color: var(--white); margin-bottom: 28px; }
+.hero-headline em { font-style: italic; color: var(--gold); }
+.hero-sub { font-size: 18px; line-height: 1.75; color: rgba(255,255,255,0.52); margin-bottom: 48px; max-width: 560px; margin-left: auto; margin-right: auto; }
+.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin-bottom: 72px; }
+/* Animated stat ticker */
+.hero-stats { display: flex; gap: 0; border-top: 1px solid rgba(184,149,42,0.15); border-bottom: 1px solid rgba(184,149,42,0.15); width: 100%; max-width: 900px; margin: 0 auto; }
+.hero-stat { flex: 1; padding: 28px 24px; text-align: center; border-right: 1px solid rgba(184,149,42,0.12); position: relative; cursor: default; transition: background 0.3s; }
+.hero-stat:last-child { border-right: none; }
+.hero-stat:hover { background: rgba(184,149,42,0.05); }
+.hero-stat-num { font-family: var(--font-display); font-size: 42px; font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: 6px; }
+.hero-stat-label { font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.45); letter-spacing: 0.5px; }
+.hero-stat-bar { position: absolute; bottom: 0; left: 0; height: 2px; background: var(--gold); width: 0; transition: width 1.2s ease; }
+.hero-stat.counted .hero-stat-bar { width: 100%; }
+.btn-primary { background: var(--gold); color: var(--navy-deep); padding: 15px 34px; font-size: 14px; font-weight: 600; font-family: var(--font-body); border: none; border-radius: 2px; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.2s, transform 0.15s; }
+.btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+.btn-ghost { background: transparent; color: rgba(255,255,255,0.75); padding: 15px 34px; font-size: 14px; font-weight: 500; font-family: var(--font-body); border: 1px solid rgba(255,255,255,0.18); border-radius: 2px; cursor: pointer; text-decoration: none; display: inline-block; transition: border-color 0.2s, color 0.2s; }
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+/* TRUST */
+#trust { background: var(--navy-mid); padding: 22px 52px; display: flex; align-items: center; justify-content: center; gap: 44px; flex-wrap: wrap; border-bottom: 1px solid rgba(184,149,42,0.15); }
+.trust-lbl { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+.trust-sep { width: 1px; height: 20px; background: rgba(255,255,255,0.1); }
+.trust-items { display: flex; gap: 36px; flex-wrap: wrap; align-items: center; }
+.trust-item { font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.55); display: flex; align-items: center; gap: 7px; }
+.trust-dot { width: 5px; height: 5px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
+
+/* SECTIONS */
+section { padding: 108px 52px; }
+.section-inner { max-width: 1240px; margin: 0 auto; }
+.section-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+.section-eyebrow::before { content: ''; width: 22px; height: 1px; background: var(--gold); }
+.section-title { font-family: var(--font-display); font-size: clamp(36px, 4vw, 54px); font-weight: 700; line-height: 1.08; margin-bottom: 20px; color: var(--navy-deep); }
+.section-title.light { color: var(--white); }
+.section-sub { font-size: 17px; line-height: 1.75; color: var(--text-muted); max-width: 580px; margin-bottom: 60px; }
+.section-sub.light { color: rgba(255,255,255,0.52); }
+
+/* SERVICES */
+#services { background: var(--white); }
+.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid rgba(27,32,71,0.09); }
+.svc-card { padding: 44px 36px; border-right: 1px solid rgba(27,32,71,0.07); border-bottom: 1px solid rgba(27,32,71,0.07); position: relative; overflow: hidden; transition: background 0.3s; cursor: default; }
+.svc-card:hover { background: var(--gray-light); }
+.svc-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--gold); transform: scaleY(0); transform-origin: bottom; transition: transform 0.35s ease; }
+.svc-card:hover::before { transform: scaleY(1); }
+.svc-bg-num { position: absolute; top: 16px; right: 22px; font-family: var(--font-display); font-size: 60px; font-weight: 700; color: rgba(27,32,71,0.04); line-height: 1; user-select: none; transition: color 0.3s; }
+.svc-card:hover .svc-bg-num { color: rgba(184,149,42,0.07); }
+.svc-ico { width: 44px; height: 44px; color: var(--gold); margin-bottom: 22px; }
+.svc-title { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--navy-deep); margin-bottom: 10px; line-height: 1.2; }
+.svc-desc { font-size: 14px; line-height: 1.75; color: var(--text-muted); }
+.svc-reveal { margin-top: 18px; font-size: 13px; font-weight: 600; color: var(--gold); display: flex; align-items: center; gap: 6px; opacity: 0; transform: translateY(6px); transition: opacity 0.3s, transform 0.3s; }
+.svc-reveal::after { content: '→'; }
+.svc-card:hover .svc-reveal { opacity: 1; transform: translateY(0); }
+
+/* AGENTS — tabbed */
+#agents { background: var(--navy-deep); }
+.agent-tabs { display: flex; border-bottom: 1px solid rgba(184,149,42,0.18); }
+.agent-tab { flex: 1; padding: 20px 26px; background: none; border: none; border-bottom: 3px solid transparent; cursor: pointer; text-align: left; position: relative; top: 1px; transition: all 0.2s; }
+.tab-num { display: block; font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(184,149,42,0.3); margin-bottom: 5px; transition: color 0.2s; }
+.tab-name { font-family: var(--font-display); font-size: 19px; font-weight: 600; color: rgba(255,255,255,0.3); transition: color 0.2s; display: block; }
+.agent-tab:hover .tab-name { color: rgba(255,255,255,0.6); }
+.agent-tab.active { border-bottom-color: var(--gold); }
+.agent-tab.active .tab-num { color: var(--gold); }
+.agent-tab.active .tab-name { color: var(--white); }
+.agent-panel { display: none; padding: 60px 0 16px; }
+.agent-panel.active { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; animation: panelIn 0.4s ease; }
+@keyframes panelIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+.panel-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; display: flex; align-items: center; gap: 10px; }
+.panel-eyebrow::before { content: ''; width: 18px; height: 1px; background: var(--gold); }
+.panel-title { font-family: var(--font-display); font-size: clamp(30px, 3vw, 48px); font-weight: 700; color: var(--white); margin-bottom: 18px; line-height: 1.08; }
+.panel-body { font-size: 16px; line-height: 1.8; color: rgba(255,255,255,0.52); margin-bottom: 32px; }
+.panel-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 36px; }
+.panel-tag { font-size: 11px; font-weight: 500; color: var(--gold); background: rgba(184,149,42,0.1); border: 1px solid rgba(184,149,42,0.22); padding: 5px 13px; border-radius: 2px; }
+.panel-cta { display: inline-block; background: var(--gold); color: var(--navy-deep); padding: 13px 30px; font-size: 13px; font-weight: 600; font-family: var(--font-body); border-radius: 2px; text-decoration: none; transition: background 0.2s; }
+.panel-cta:hover { background: var(--gold-light); }
+.panel-feats { list-style: none; }
+.panel-feat { display: flex; gap: 18px; align-items: flex-start; padding: 19px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.panel-feat:first-child { border-top: 1px solid rgba(255,255,255,0.05); }
+.feat-ico { width: 38px; height: 38px; flex-shrink: 0; background: rgba(184,149,42,0.1); border: 1px solid rgba(184,149,42,0.2); border-radius: 2px; display: flex; align-items: center; justify-content: center; color: var(--gold); }
+.feat-h { font-family: var(--font-display); font-size: 18px; font-weight: 600; color: var(--white); margin-bottom: 3px; }
+.feat-p { font-size: 13px; line-height: 1.6; color: rgba(255,255,255,0.38); }
+.data-flow { margin-top: 52px; background: rgba(255,255,255,0.03); border: 1px solid rgba(184,149,42,0.13); border-radius: 3px; padding: 28px 36px; }
+.flow-head { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: rgba(255,255,255,0.28); margin-bottom: 18px; text-align: center; }
+.flow-nodes { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px; }
+.flow-node { font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.65); background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 8px 16px; border-radius: 2px; white-space: nowrap; }
+.flow-arr { color: var(--gold); font-size: 15px; opacity: 0.65; }
+.flow-sep { color: rgba(255,255,255,0.1); font-size: 20px; margin: 0 10px; }
+
+/* HOW — vertical timeline */
+#how { background: var(--navy-mid); }
+.timeline { position: relative; max-width: 860px; }
+.timeline::before { content: ''; position: absolute; left: 39px; top: 8px; bottom: 8px; width: 1px; background: linear-gradient(to bottom, var(--gold), rgba(184,149,42,0.04)); }
+.t-step { display: flex; gap: 48px; align-items: flex-start; margin-bottom: 60px; }
+.t-step:last-child { margin-bottom: 0; }
+.t-num { width: 80px; height: 80px; background: var(--gold); color: var(--navy-deep); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 30px; font-weight: 700; flex-shrink: 0; position: relative; z-index: 1; box-shadow: 0 0 0 8px var(--navy-mid); }
+.t-body { padding-top: 18px; }
+.t-title { font-family: var(--font-display); font-size: 30px; font-weight: 700; color: var(--white); margin-bottom: 10px; }
+.t-desc { font-size: 15px; line-height: 1.8; color: rgba(255,255,255,0.52); max-width: 540px; }
+.t-badge { display: inline-block; margin-top: 14px; font-size: 11px; font-weight: 600; color: var(--gold); background: rgba(184,149,42,0.1); border: 1px solid rgba(184,149,42,0.22); padding: 4px 13px; border-radius: 2px; }
+
+/* IMPACT */
+#impact { background: var(--gray-light); }
+.stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid rgba(27,32,71,0.1); margin-bottom: 48px; }
+.stat-block { background: var(--navy-deep); padding: 48px 36px; position: relative; border-right: 1px solid rgba(255,255,255,0.05); }
+.stat-block::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gold); }
+.stat-num { font-family: var(--font-display); font-size: 68px; font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: 8px; }
+.stat-unit { font-size: 32px; font-weight: 400; opacity: 0.6; margin-left: 2px; }
+.stat-lbl { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--white); margin-bottom: 14px; }
+.stat-desc { font-size: 13px; line-height: 1.7; color: rgba(255,255,255,0.42); margin-bottom: 12px; }
+.stat-src { font-size: 11px; color: rgba(184,149,42,0.45); font-style: italic; }
+.impact-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 48px; }
+.i-card { background: var(--white); border: 1px solid rgba(27,32,71,0.08); border-radius: 3px; padding: 34px 28px; transition: transform 0.3s, box-shadow 0.3s; }
+.i-card:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(27,32,71,0.09); }
+.i-card-ico { width: 44px; height: 44px; background: rgba(184,149,42,0.08); border: 1px solid rgba(184,149,42,0.18); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--gold); margin-bottom: 18px; }
+.i-card-head { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--navy-deep); line-height: 1.3; margin-bottom: 12px; }
+.i-card-body { font-size: 13px; line-height: 1.75; color: var(--text-muted); margin-bottom: 14px; }
+.i-card-src { font-size: 11px; color: rgba(61,74,92,0.4); font-style: italic; border-top: 1px solid rgba(27,32,71,0.06); padding-top: 12px; }
+.impact-callout { background: var(--navy-deep); border: 1px solid rgba(184,149,42,0.2); border-radius: 3px; padding: 52px; display: grid; grid-template-columns: auto 1px 1fr; gap: 52px; align-items: center; }
+.callout-num { font-family: var(--font-display); font-size: 54px; font-weight: 700; color: var(--gold); line-height: 1; white-space: nowrap; }
+.callout-lbl { font-size: 13px; color: rgba(255,255,255,0.38); margin-top: 7px; }
+.callout-div { width: 1px; height: 80px; background: rgba(184,149,42,0.18); }
+.callout-body p { font-size: 15px; line-height: 1.85; color: rgba(255,255,255,0.52); }
+
+/* SOLUTION LADDER */
+#ladder { background: var(--navy-deep); }
+.ladder-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; margin-bottom: 60px; align-items: end; }
+.ladder-grid { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid rgba(184,149,42,0.1); }
+.l-item { padding: 40px; display: flex; gap: 24px; align-items: flex-start; border-right: 1px solid rgba(184,149,42,0.07); border-bottom: 1px solid rgba(184,149,42,0.07); transition: background 0.3s; cursor: default; }
+.l-item:hover { background: rgba(255,255,255,0.03); }
+.l-num { font-family: var(--font-display); font-size: 50px; font-weight: 700; color: rgba(184,149,42,0.1); line-height: 1; flex-shrink: 0; width: 52px; transition: color 0.3s; }
+.l-item:hover .l-num { color: rgba(184,149,42,0.22); }
+.l-when { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 7px; opacity: 0.75; }
+.l-title { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+.l-desc { font-size: 13px; line-height: 1.7; color: rgba(255,255,255,0.38); }
+.l-badges { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+.l-badge { font-size: 11px; color: rgba(255,255,255,0.28); background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); padding: 3px 9px; border-radius: 2px; }
+.l-item.full { grid-column: 1 / -1; }
+
+/* VALUES */
+#values { background: var(--white); }
+.values-grid { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid rgba(27,32,71,0.08); }
+.v-card { padding: 44px 36px; border-right: 1px solid rgba(27,32,71,0.07); border-bottom: 1px solid rgba(27,32,71,0.07); position: relative; overflow: hidden; transition: background 0.3s; }
+.v-card:hover { background: var(--gray-light); }
+.v-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform 0.35s ease; }
+.v-card:hover::after { transform: scaleX(1); }
+.v-num { font-family: var(--font-display); font-size: 13px; font-weight: 700; color: var(--gold); margin-bottom: 14px; letter-spacing: 1px; }
+.v-title { font-family: var(--font-display); font-size: 22px; font-weight: 700; color: var(--navy-deep); margin-bottom: 8px; }
+.v-motto { font-family: var(--font-display); font-size: 14px; font-style: italic; color: var(--navy-mid); margin-bottom: 12px; line-height: 1.5; }
+.v-desc { font-size: 13px; line-height: 1.75; color: var(--text-muted); }
+
+/* FAQ */
+#faq { background: var(--gray-light); }
+.faq-wrap { max-width: 780px; }
+.faq-item { border-bottom: 1px solid rgba(27,32,71,0.1); }
+.faq-btn { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 24px 0; background: none; border: none; cursor: pointer; text-align: left; gap: 24px; }
+.faq-q { font-family: var(--font-display); font-size: 20px; font-weight: 600; color: var(--navy-deep); line-height: 1.3; }
+.faq-ico { width: 28px; height: 28px; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; color: var(--navy-deep); flex-shrink: 0; transition: transform 0.3s; }
+.faq-item.open .faq-ico { transform: rotate(45deg); }
+.faq-ans { font-size: 15px; line-height: 1.8; color: var(--text-muted); max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s; }
+.faq-item.open .faq-ans { max-height: 320px; padding-bottom: 24px; }
+
+/* CONTACT */
+#contact { background: var(--navy-deep); }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 88px; align-items: start; }
+.contact-motto { font-family: var(--font-display); font-size: 18px; font-style: italic; color: var(--gold); margin-bottom: 26px; line-height: 1.55; }
+.contact-body { font-size: 15px; line-height: 1.8; color: rgba(255,255,255,0.48); margin-bottom: 42px; }
+.contact-deets { list-style: none; }
+.contact-deets li { font-size: 14px; color: rgba(255,255,255,0.52); padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; gap: 14px; }
+.contact-deets li strong { color: var(--gold); min-width: 76px; font-weight: 500; }
+.contact-form { display: flex; flex-direction: column; gap: 20px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-field { display: flex; flex-direction: column; gap: 8px; }
+.form-lbl { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.38); }
+.form-input, .form-textarea { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 2px; padding: 13px 16px; font-size: 14px; font-family: var(--font-body); color: var(--white); outline: none; transition: border-color 0.2s; width: 100%; }
+.form-input:focus, .form-textarea:focus { border-color: var(--gold); }
+.form-input::placeholder, .form-textarea::placeholder { color: rgba(255,255,255,0.2); }
+.form-textarea { resize: vertical; min-height: 112px; }
+.svc-sel { display: flex; flex-direction: column; gap: 9px; }
+.svc-opt { display: flex; align-items: flex-start; gap: 13px; padding: 13px 15px; border: 1px solid rgba(255,255,255,0.08); border-radius: 2px; cursor: pointer; transition: border-color 0.2s, background 0.2s; }
+.svc-opt:hover { border-color: rgba(184,149,42,0.35); }
+.svc-opt.selected { border-color: var(--gold); background: rgba(184,149,42,0.07); }
+.svc-opt input[type="radio"] { display: none; }
+.svc-radio { width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.22); border-radius: 50%; flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; justify-content: center; transition: border-color 0.2s; }
+.svc-opt.selected .svc-radio { border-color: var(--gold); }
+.svc-dot { width: 8px; height: 8px; background: var(--gold); border-radius: 50%; opacity: 0; transition: opacity 0.2s; }
+.svc-opt.selected .svc-dot { opacity: 1; }
+.svc-name { font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.72); margin-bottom: 2px; }
+.svc-sub { font-size: 12px; color: rgba(255,255,255,0.28); }
+.btn-submit { background: var(--gold); color: var(--navy-deep); border: none; border-radius: 2px; padding: 17px; font-size: 15px; font-weight: 700; font-family: var(--font-body); cursor: pointer; transition: background 0.2s; width: 100%; }
+.btn-submit:hover { background: var(--gold-light); }
+.form-note { font-size: 12px; color: rgba(255,255,255,0.22); text-align: center; margin-top: 8px; }
+
+/* FOOTER */
+footer { background: var(--navy-deep); border-top: 1px solid rgba(184,149,42,0.15); padding: 40px 52px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px; }
+.footer-logo { font-family: var(--font-display); font-size: 19px; font-weight: 700; color: var(--white); margin-bottom: 4px; letter-spacing: 2px; text-transform: uppercase; }
+.footer-tag { font-size: 12px; color: rgba(255,255,255,0.28); font-style: italic; }
+.footer-links { list-style: none; display: flex; gap: 30px; flex-wrap: wrap; }
+.footer-links a { font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.38); text-decoration: none; letter-spacing: 0.5px; text-transform: uppercase; transition: color 0.2s; }
+.footer-links a:hover { color: var(--gold); }
+.footer-copy { font-size: 12px; color: rgba(255,255,255,0.2); }
+
+/* FADE IN */
+.fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* RESPONSIVE */
+@media (max-width: 960px) {
+  nav { padding: 0 24px; }
+  .nav-links { display: none; }
+  section { padding: 72px 24px; }
+  #trust { padding: 20px 24px; gap: 14px; flex-direction: column; align-items: flex-start; }
+  .hero-inner { grid-template-columns: 1fr; gap: 0; }
+  .hero-emblem-wrap { display: none; }
+  .services-grid, .values-grid { grid-template-columns: 1fr; }
+  .agent-panel.active { grid-template-columns: 1fr; gap: 40px; }
+  .agent-tabs { flex-direction: column; border-bottom: none; }
+  .agent-tab { border-bottom: 1px solid rgba(184,149,42,0.12); top: 0; }
+  .stat-grid, .impact-cards { grid-template-columns: 1fr; }
+  .impact-callout { grid-template-columns: 1fr; gap: 28px; }
+  .callout-div { display: none; }
+  .ladder-grid, .ladder-intro { grid-template-columns: 1fr; }
+  .l-item.full { grid-column: 1; }
+  .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+  .form-row { grid-template-columns: 1fr; }
+  footer { flex-direction: column; align-items: flex-start; padding: 32px 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-logo">
+    
+    <div class="nav-wordmark">
+      <span class="nav-nestor">Nestor</span>
+      <span class="nav-forge">Forge</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#agents">AI Suite</a></li>
+    <li><a href="#how">Process</a></li>
+    <li><a href="#impact">Impact</a></li>
+    <li><a href="#values">Values</a></li>
+    <li><a href="#contact" class="nav-cta">Free Consultation</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-pattern"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <p class="hero-eyebrow">St. Louis, Missouri &nbsp;·&nbsp; Est. 2026</p>
+    <h1 class="hero-headline">Ancient wisdom.<br/><em>Modern tools.</em><br/>Every small business, unstoppable.</h1>
+    <p class="hero-sub">We help St. Louis small businesses grow sales, run smarter, and protect their data through hands-on AI training and custom automation — built by practitioners with 4+ years of real-world experience.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Book Free Consultation</a>
+      <a href="#services" class="btn-ghost">See What We Build</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat" id="hs0">
+        <div class="hero-stat-num" data-target="15">0</div>
+        <div class="hero-stat-label">Hours saved per week</div>
+        <div class="hero-stat-bar"></div>
+      </div>
+      <div class="hero-stat" id="hs1">
+        <div class="hero-stat-num" data-target="92">0</div>
+        <div class="hero-stat-label">% fewer data errors</div>
+        <div class="hero-stat-bar"></div>
+      </div>
+      <div class="hero-stat" id="hs2">
+        <div class="hero-stat-num" data-target="4">0</div>
+        <div class="hero-stat-label">Month avg. breakeven</div>
+        <div class="hero-stat-bar"></div>
+      </div>
+      <div class="hero-stat" id="hs3">
+        <div class="hero-stat-num" data-target="41600" data-prefix="$" data-format="currency">$0</div>
+        <div class="hero-stat-label">Recovered labor value / yr</div>
+        <div class="hero-stat-bar"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<div id="trust">
+  <span class="trust-lbl">Built on</span>
+  <div class="trust-sep"></div>
+  <div class="trust-items">
+    <span class="trust-item"><span class="trust-dot"></span>Microsoft Copilot Studio</span>
+    <span class="trust-item"><span class="trust-dot"></span>Power Automate</span>
+    <span class="trust-item"><span class="trust-dot"></span>Azure AI Services</span>
+    <span class="trust-item"><span class="trust-dot"></span>Microsoft 365</span>
+    <span class="trust-item"><span class="trust-dot"></span>4+ Years Real-World AI Experience</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-inner">
+    <span class="section-eyebrow">What We Do</span>
+    <h2 class="section-title">Services built for<br/>small business reality</h2>
+    <p class="section-sub">No jargon. No enterprise price tags. Practical AI tools that work, implemented in person alongside your team.</p>
+    <div class="services-grid fade-in">
+      <div class="svc-card">
+        <span class="svc-bg-num">01</span>
+        <svg class="svc-ico" viewBox="0 0 48 48" fill="none"><path d="M8 36 L16 16 L24 28 L32 8 L40 20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="6" y="38" width="36" height="3" rx="1.5" fill="currentColor" opacity="0.2"/></svg>
+        <h3 class="svc-title">Website Design &amp; Development</h3>
+        <p class="svc-desc">Custom, mobile-responsive websites built to convert visitors and integrate with your AI ecosystem from day one. No templates. Built around your business.</p>
+        <div class="svc-reveal">Start with a consultation</div>
+      </div>
+      <div class="svc-card">
+        <span class="svc-bg-num">02</span>
+        <svg class="svc-ico" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="14" stroke="currentColor" stroke-width="2"/><path d="M24 14 L24 24 L32 28" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="24" cy="24" r="3" fill="currentColor"/></svg>
+        <h3 class="svc-title">AI Jumpstart Session</h3>
+        <p class="svc-desc">A 2–3 hour in-person working session. You leave with AI tools built around your actual workflows, a written action plan, and a follow-up call the same day.</p>
+        <div class="svc-reveal">Same-day tools delivered</div>
+      </div>
+      <div class="svc-card">
+        <span class="svc-bg-num">03</span>
+        <svg class="svc-ico" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="16" r="8" stroke="currentColor" stroke-width="2"/><path d="M12 40 C12 33 36 33 36 40" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="36" cy="20" r="5" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="20" r="5" stroke="currentColor" stroke-width="1.5"/></svg>
+        <h3 class="svc-title">AI Training Workshops</h3>
+        <p class="svc-desc">Monthly group training for 10–20 small business owners. Hands-on live tool building, industry-specific tracks, a security module, and a workbook they use immediately.</p>
+        <div class="svc-reveal">Public &amp; private sessions</div>
+      </div>
+      <div class="svc-card">
+        <span class="svc-bg-num">04</span>
+        <svg class="svc-ico" viewBox="0 0 48 48" fill="none"><rect x="8" y="12" width="32" height="28" rx="3" stroke="currentColor" stroke-width="2"/><path d="M16 24 L22 30 L32 20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3 class="svc-title">AI Agent Development</h3>
+        <p class="svc-desc">Custom Microsoft Copilot Studio agents that automate bookings, staff operations, and management intelligence. Scoped from a single agent to a full Business Suite.</p>
+        <div class="svc-reveal">Single agent to full suite</div>
+      </div>
+      <div class="svc-card">
+        <span class="svc-bg-num">05</span>
+        <svg class="svc-ico" viewBox="0 0 48 48" fill="none"><rect x="8" y="8" width="14" height="14" rx="2" stroke="currentColor" stroke-width="2"/><rect x="26" y="8" width="14" height="14" rx="2" stroke="currentColor" stroke-width="2"/><rect x="8" y="26" width="14" height="14" rx="2" stroke="currentColor" stroke-width="2"/><rect x="26" y="26" width="14" height="14" rx="2" stroke="currentColor" stroke-width="2"/><path d="M22 15 L26 15 M15 22 L15 26 M33 22 L33 26 M22 33 L26 33" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <h3 class="svc-title">Custom Automation Workflows</h3>
+        <p class="svc-desc">We map your manual processes and replace them with intelligent Power Automate workflows, saving hours every week across scheduling, communication, and operations.</p>
+        <div class="svc-reveal">Replace manual with smart flows</div>
+      </div>
+      <div class="svc-card">
+        <span class="svc-bg-num">06</span>
+        <svg class="svc-ico" viewBox="0 0 48 48" fill="none"><path d="M24 8 C16 8 10 14 10 22 C10 28 14 33 20 35 L20 40 L28 40 L28 35 C34 33 38 28 38 22 C38 14 32 8 24 8 Z" stroke="currentColor" stroke-width="2" fill="none"/><path d="M20 40 L28 40" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <h3 class="svc-title">AI Guidance Partner</h3>
+        <p class="svc-desc">Monthly retainer for ongoing AI integration. Monthly audits, prompt engineering, workflow improvements, staff training, and a security review — every single month.</p>
+        <div class="svc-reveal">Ongoing strategic partnership</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENTS — tabbed -->
+<section id="agents">
+  <div class="section-inner">
+    <span class="section-eyebrow">Business AI Suite</span>
+    <h2 class="section-title light">Three agents.<br/>One connected system.</h2>
+    <p class="section-sub light">Built on Microsoft Copilot Studio, Power Automate, and Azure AI. Each agent handles a different layer of your operation — and they share data in real time.</p>
+
+    <div class="agent-tabs">
+      <button class="agent-tab active" onclick="switchTab(0)">
+        <span class="tab-num">Agent 01</span>
+        <span class="tab-name">Guest Experience</span>
+      </button>
+      <button class="agent-tab" onclick="switchTab(1)">
+        <span class="tab-num">Agent 02</span>
+        <span class="tab-name">Staff Operations</span>
+      </button>
+      <button class="agent-tab" onclick="switchTab(2)">
+        <span class="tab-num">Agent 03</span>
+        <span class="tab-name">Manager Intelligence</span>
+      </button>
+    </div>
+
+    <div class="agent-panel active" id="panel-0">
+      <div>
+        <span class="panel-eyebrow">Agent 01</span>
+        <h3 class="panel-title">Guest Experience Agent</h3>
+        <p class="panel-body">Deployed on your website or Google listing. Answers inquiries, handles bookings, and sends instant confirmations 24 hours a day — without any staff involvement. Every unanswered inquiry after hours is a customer who found someone else.</p>
+        <div class="panel-tags">
+          <span class="panel-tag">Copilot Studio</span><span class="panel-tag">SharePoint</span><span class="panel-tag">Power Automate</span><span class="panel-tag">Outlook</span>
+        </div>
+        <a href="#contact" class="panel-cta">Build This Agent</a>
+      </div>
+      <ul class="panel-feats">
+        <li class="panel-feat">
+          <div class="feat-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+          <div><div class="feat-h">24/7 Inquiry Response</div><p class="feat-p">Answers questions in your business's own voice, any hour, any day. No staff required.</p></div>
+        </li>
+        <li class="panel-feat">
+          <div class="feat-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+          <div><div class="feat-h">Automated Booking</div><p class="feat-p">Writes reservations to SharePoint and fires Outlook confirmations automatically.</p></div>
+        </li>
+        <li class="panel-feat">
+          <div class="feat-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l1.87-1.87a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <div><div class="feat-h">Staff Escalation</div><p class="feat-p">Flags conversations that need a human and posts them to Teams instantly.</p></div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="agent-panel" id="panel-1">
+      <div>
+        <span class="panel-eyebrow">Agent 02</span>
+        <h3 class="panel-title">Staff Operations Agent</h3>
+        <p class="panel-body">Lives inside Microsoft Teams. Staff check schedules, flag supply issues, and report maintenance problems without interrupting the manager on the floor. Operational clarity without the chaos.</p>
+        <div class="panel-tags">
+          <span class="panel-tag">Teams</span><span class="panel-tag">Dataverse</span><span class="panel-tag">Power Automate</span><span class="panel-tag">Planner</span>
+        </div>
+        <a href="#contact" class="panel-cta">Build This Agent</a>
+      </div>
+      <ul class="panel-feats">
+        <li class="panel-feat">
+          <div class="feat-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <div><div class="feat-h">Schedule Self-Service</div><p class="feat-p">Staff check schedules and submit shift requests without pulling anyone away.</p></div>
+        </li>
+        <li class="panel-feat">
+          <div class="feat-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+          <div><div class="feat-h">Issue Reporting</div><p class="feat-p">Supply shortages and maintenance problems are logged to Dataverse and routed to Planner automatically.</p></div>
+        </li>
+        <li class="panel-feat">
+          <div class="feat-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+          <div><div class="feat-h">Task Creation</div><p class="feat-p">Automatically creates and assigns Planner tasks from staff-reported issues. Nothing gets lost.</p></div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="agent-panel" id="panel-2">
+      <div>
+        <span class="panel-eyebrow">Agent 03</span>
+        <h3 class="panel-title">Manager Intelligence Agent</h3>
+        <p class="panel-body">Daily briefings, inquiry summaries, and communication drafts delivered automatically every morning via Teams. Powered by Azure OpenAI — your manager starts every day informed and ready, not buried in catch-up.</p>
+        <div class="panel-tags">
+          <span class="panel-tag">Azure OpenAI</span><span class="panel-tag">Power Automate</span><span class="panel-tag">SharePoint</span><span class="panel-tag">Teams</span>
+        </div>
+        <a href="#contact" class="panel-cta">Build This Agent</a>
+      </div>
+      <ul class="panel-feats">
+        <li class="panel-feat">
+          <div class="feat-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <div><div class="feat-h">Automated Daily Briefing</div><p class="feat-p">Guest inquiries, staff issues, and priorities — summarized and delivered before doors open.</p></div>
+        </li>
+        <li class="panel-feat">
+          <div class="feat-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <div><div class="feat-h">AI Summarization</div><p class="feat-p">Azure OpenAI synthesizes data from both agents into plain-language management summaries.</p></div>
+        </li>
+        <li class="panel-feat">
+          <div class="feat-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div><div class="feat-h">Communication Drafts</div><p class="feat-p">Staff updates, vendor follow-ups, and guest responses drafted and ready to review — not written from scratch.</p></div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="data-flow fade-in">
+      <p class="flow-head">All three agents share data in real time — nothing lives in a silo</p>
+      <div class="flow-nodes">
+        <span class="flow-node">Guest Agent</span><span class="flow-arr">→</span>
+        <span class="flow-node">SharePoint</span><span class="flow-arr">→</span>
+        <span class="flow-node">Manager Agent</span>
+        <span class="flow-sep">|</span>
+        <span class="flow-node">Staff Agent</span><span class="flow-arr">→</span>
+        <span class="flow-node">Dataverse</span><span class="flow-arr">→</span>
+        <span class="flow-node">Manager Agent</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW — vertical timeline -->
+<section id="how">
+  <div class="section-inner">
+    <span class="section-eyebrow">Our Process</span>
+    <h2 class="section-title light">How we work</h2>
+    <p class="section-sub light">Every engagement starts free. No client is charged until we fully understand their operation and confirm AI is the right fit.</p>
+    <div class="timeline fade-in">
+      <div class="t-step">
+        <div class="t-num">1</div>
+        <div class="t-body">
+          <h3 class="t-title">Discover</h3>
+          <p class="t-desc">We spend time inside your operation — learning your tools, your team, and your biggest time drains. We audit your workflow and identify where AI delivers the most value, fastest. If AI isn't the right solution, we tell you.</p>
+          <span class="t-badge">Free 30–45 minute consultation</span>
+        </div>
+      </div>
+      <div class="t-step">
+        <div class="t-num">2</div>
+        <div class="t-body">
+          <h3 class="t-title">Build</h3>
+          <p class="t-desc">We configure your agents, build your Power Automate workflows, and connect your Microsoft 365 environment. Every tool is tested against your real operation before go-live. You see progress at every stage.</p>
+          <span class="t-badge">Built in your Microsoft tenant — your data stays yours</span>
+        </div>
+      </div>
+      <div class="t-step">
+        <div class="t-num">3</div>
+        <div class="t-body">
+          <h3 class="t-title">Deploy &amp; Support</h3>
+          <p class="t-desc">We launch, train your staff, and document everything. We stay available as your operation evolves — because AI that nobody uses isn't AI. It's just an expense. Monthly retainer clients get continuous improvement, not just maintenance.</p>
+          <span class="t-badge">Full staff training included on every engagement</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section id="impact">
+  <div class="section-inner">
+    <span class="section-eyebrow">The Impact</span>
+    <h2 class="section-title">What AI actually does<br/>for a small business</h2>
+    <p class="section-sub">These numbers come from real-world AI adoption research across small businesses, nonprofits, and service organizations — not projections.</p>
+    <div class="stat-grid fade-in">
+      <div class="stat-block">
+        <div class="stat-num">15<span class="stat-unit">hrs</span></div>
+        <div class="stat-lbl">Saved per week</div>
+        <p class="stat-desc">Average administrative time recovered when AI is implemented with structured workflows rather than ad hoc tool use.</p>
+        <div class="stat-src">SigmaForces, 2025 Nonprofit AI Impact Analysis</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">92<span class="stat-unit">%</span></div>
+        <div class="stat-lbl">Fewer data errors</div>
+        <p class="stat-desc">Reduction in manual data entry errors after implementing AI-assisted scheduling and administrative automation.</p>
+        <div class="stat-src">Shyft Healthcare AI Implementation Case Studies, 2025</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-num">4.5<span class="stat-unit">mo</span></div>
+        <div class="stat-lbl">Average breakeven</div>
+        <p class="stat-desc">Time to breakeven on AI implementation investment for small and mid-sized organizations, based on recovered labor hours alone.</p>
+        <div class="stat-src">Shyft Healthcare AI Implementation Case Studies, 2025</div>
+      </div>
+    </div>
+    <div class="impact-cards fade-in">
+      <div class="i-card">
+        <div class="i-card-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+        <div class="i-card-head">Only 7% of small businesses report meaningful AI impact</div>
+        <p class="i-card-body">92% have adopted some AI tool — but most are stuck with one person using ChatGPT for emails while the rest of the team is buried in manual work. That's not a strategy. Nestor Forge builds the system so the whole organization moves.</p>
+        <div class="i-card-src">Virtuous 2026 Nonprofit AI Adoption Report, 346 organizations</div>
+      </div>
+      <div class="i-card">
+        <div class="i-card-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="6" height="18" rx="1"/><rect x="9" y="8" width="6" height="13" rx="1"/><rect x="16" y="13" width="6" height="8" rx="1"/></svg></div>
+        <div class="i-card-head">Larger organizations adopt AI at nearly twice the rate</div>
+        <p class="i-card-body">Businesses with budgets over $1M adopt AI at 66% vs. 34% for smaller operations. The gap isn't technology — it's access to expertise. Nestor Forge exists specifically to close that gap.</p>
+        <div class="i-card-src">TechSoup and Tapp Network, State of AI in Nonprofits 2025</div>
+      </div>
+      <div class="i-card">
+        <div class="i-card-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+        <div class="i-card-head">Response speed is the #1 driver of inquiry conversion</div>
+        <p class="i-card-body">A Guest Experience Agent responds to every inquiry immediately at any hour. Every unanswered message after hours is a customer who found someone else. Speed isn't a nice-to-have — it's revenue.</p>
+        <div class="i-card-src">Harvard Business Review lead response time research</div>
+      </div>
+    </div>
+    <div class="impact-callout fade-in">
+      <div>
+        <div class="callout-num">$41,600</div>
+        <div class="callout-lbl">in recovered labor value per year</div>
+      </div>
+      <div class="callout-div"></div>
+      <div class="callout-body">
+        <p>Based on a conservative estimate of 10 hours per week recovered at $20 per hour, time savings from AI automation nearly cover the full annual cost of a Guidance Partner retainer. This doesn't account for increased revenue from faster inquiry response, higher retention from better customer support, or the compounding effect of a team no longer buried in administrative work.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION LADDER -->
+<section id="ladder">
+  <div class="section-inner">
+    <div class="ladder-intro">
+      <div>
+        <span class="section-eyebrow">The Right Tool for the Problem</span>
+        <h2 class="section-title light">Not every business<br/>needs an agent.</h2>
+      </div>
+      <p class="section-sub light" style="margin-bottom:0;">We match the solution to the actual problem. These are the five rungs we work from — and we'll tell you honestly where you belong.</p>
+    </div>
+    <div class="ladder-grid fade-in">
+      <div class="l-item">
+        <div class="l-num">01</div>
+        <div>
+          <div class="l-when">When the problem is writing</div>
+          <div class="l-title">Prompt Library</div>
+          <p class="l-desc">Custom AI writing tools built around your voice and workflows. Eliminates repetitive writing tasks across your whole team — same day.</p>
+          <div class="l-badges"><span class="l-badge">2–3 hrs delivery</span></div>
+        </div>
+      </div>
+      <div class="l-item">
+        <div class="l-num">02</div>
+        <div>
+          <div class="l-when">When the process is predictable</div>
+          <div class="l-title">Power Automate Flow</div>
+          <p class="l-desc">Replaces repeated manual processes that follow a predictable pattern. Submit-and-respond, no conversation needed.</p>
+          <div class="l-badges"><span class="l-badge">4–8 hrs delivery</span></div>
+        </div>
+      </div>
+      <div class="l-item">
+        <div class="l-num">03</div>
+        <div>
+          <div class="l-when">When the process needs intelligence</div>
+          <div class="l-title">AI-Enhanced Flow</div>
+          <p class="l-desc">A Power Automate flow that calls an LLM mid-process to generate intelligent content — not just route data, but create it.</p>
+          <div class="l-badges"><span class="l-badge">1–2 days delivery</span></div>
+        </div>
+      </div>
+      <div class="l-item">
+        <div class="l-num">04</div>
+        <div>
+          <div class="l-when">When humans need back-and-forth</div>
+          <div class="l-title">Copilot Studio Agent</div>
+          <p class="l-desc">Conversational AI for ongoing dialogue with customers or staff. The right tool when interaction — not just automation — is the goal.</p>
+          <div class="l-badges"><span class="l-badge">1–2 weeks delivery</span></div>
+        </div>
+      </div>
+      <div class="l-item full">
+        <div class="l-num">05</div>
+        <div>
+          <div class="l-when">When multiple layers of the business need to move together</div>
+          <div class="l-title">Full Ecosystem — Business AI Suite</div>
+          <p class="l-desc">Multiple interconnected agents, workflows, and Microsoft 365 integrations working as one system. Guest Agent + Staff Agent + Manager Agent, all sharing data, all connected. The highest-impact transformation we offer.</p>
+          <div class="l-badges"><span class="l-badge">Weeks to months</span><span class="l-badge">Configurable for any industry</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section id="values">
+  <div class="section-inner">
+    <span class="section-eyebrow">Core Values</span>
+    <h2 class="section-title">What we stand for</h2>
+    <p class="section-sub">Six principles we built this company around. Not marketing language — the actual rules we operate by.</p>
+    <div class="values-grid fade-in">
+      <div class="v-card"><div class="v-num">01</div><div class="v-title">Forge with Integrity</div><div class="v-motto">"We say what we mean and build what we promise."</div><p class="v-desc">If AI is not the right solution for your problem, we tell you. Our reputation is worth more than any single contract.</p></div>
+      <div class="v-card"><div class="v-num">02</div><div class="v-title">Empower, Don't Depend</div><div class="v-motto">"We teach people to fish. We don't just fish for them."</div><p class="v-desc">Every engagement ends with the client trained, capable, and equipped — not just served.</p></div>
+      <div class="v-card"><div class="v-num">03</div><div class="v-title">We Are the Community</div><div class="v-motto">"We do not serve the community. We are it."</div><p class="v-desc">We show up as neighbors with tools, not outsiders with answers. When small business wins, everybody wins.</p></div>
+      <div class="v-card"><div class="v-num">04</div><div class="v-title">Guard the Forge</div><div class="v-motto">"Power without responsibility is just risk."</div><p class="v-desc">Every engagement includes a security review. We never implement tools we haven't vetted for the risks they carry.</p></div>
+      <div class="v-card"><div class="v-num">05</div><div class="v-title">AI Belongs to Everyone</div><div class="v-motto">"We're closing the gap permanently."</div><p class="v-desc">No jargon. No enterprise price tags. No gatekeeping. If you own a small business, you deserve every advantage AI can give you.</p></div>
+      <div class="v-card"><div class="v-num">06</div><div class="v-title">Stay at the Forge</div><div class="v-motto">"The day we stop learning, we stop being useful."</div><p class="v-desc">We dedicate time every week to testing new tools and updating our methods before our clients ever need to ask.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="section-inner">
+    <span class="section-eyebrow">FAQ</span>
+    <h2 class="section-title">Common questions</h2>
+    <p class="section-sub">The same questions come up in almost every first conversation. Here are the honest answers.</p>
+    <div class="faq-wrap fade-in">
+      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)"><span class="faq-q">Do we need an IT team or technical staff to use this?</span><span class="faq-ico">+</span></button><div class="faq-ans">No. That is the point. We build everything inside Microsoft tools your team likely already has — Teams, Outlook, and SharePoint. We configure it, train your staff in plain language, and stay available for questions. Zero technical staff required.</div></div>
+      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)"><span class="faq-q">Is our data secure?</span><span class="faq-ico">+</span></button><div class="faq-ans">Security is built into every engagement, not an add-on. We build exclusively on Microsoft's enterprise-grade infrastructure — your data lives inside your own Microsoft tenant. We conduct a security review at every stage and never implement tools we haven't vetted for risk.</div></div>
+      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)"><span class="faq-q">How long does deployment actually take?</span><span class="faq-ico">+</span></button><div class="faq-ans">The Jumpstart Session delivers working tools the same day. A full Business Suite deployment typically takes 2–4 weeks from first consultation to go-live, depending on your existing Microsoft setup and customization needed.</div></div>
+      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)"><span class="faq-q">Do the agents work on mobile?</span><span class="faq-ico">+</span></button><div class="faq-ans">Yes. The Guest Experience Agent works on any device through your website. The Staff and Manager Agents run inside Microsoft Teams, which has full iOS and Android apps. Your team can use them from any phone, anywhere.</div></div>
+      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)"><span class="faq-q">What happens if something breaks?</span><span class="faq-ico">+</span></button><div class="faq-ans">Guidance Partner clients have ongoing async support via text and email plus a monthly check-in. We document every workflow and configuration so fixes are fast. We know exactly how everything is built and you are never left figuring it out alone.</div></div>
+      <div class="faq-item"><button class="faq-btn" onclick="toggleFaq(this)"><span class="faq-q">Do you only work with restaurants?</span><span class="faq-ico">+</span></button><div class="faq-ans">No. Restaurants are our flagship vertical but the Business Suite is configurable for any small business. We work with trades contractors, nonprofits, healthcare training organizations, salons, gyms, and more. If you have repetitive processes and a small team, we can help.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="contact-grid">
+      <div>
+        <span class="section-eyebrow">Get In Touch</span>
+        <h2 class="section-title light">Ready to see it<br/>in action?</h2>
+        <p class="contact-motto">"Every small business deserves a wise guide.<br/>Nestor Forge is theirs."</p>
+        <p class="contact-body">Book a free 30–45 minute discovery consultation. We'll walk through your operation, show you what's possible, and tell you honestly whether it's the right fit. No pressure, no jargon, no charge.</p>
+        <ul class="contact-deets">
+          <li><strong>Location</strong> St. Louis, Missouri</li>
+          <li><strong>Email</strong> <a href="mailto:hello@nestorforge.com" style="color:inherit;">hello@nestorforge.com</a></li>
+          <li><strong>Web</strong> nestorforge.com &nbsp;·&nbsp; nestorforge.ai</li>
+          <li><strong>Hours</strong> Mon–Fri 9am–6pm &nbsp;·&nbsp; Evenings by request</li>
+        </ul>
+      </div>
+      <div>
+        <form class="contact-form" id="contactForm" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-field"><label class="form-lbl">Your Name</label><input type="text" class="form-input" placeholder="First Last" required/></div>
+            <div class="form-field"><label class="form-lbl">Business Name</label><input type="text" class="form-input" placeholder="Your Business" required/></div>
+          </div>
+          <div class="form-row">
+            <div class="form-field"><label class="form-lbl">Email</label><input type="email" class="form-input" placeholder="you@yourbusiness.com" required/></div>
+            <div class="form-field"><label class="form-lbl">Phone (Optional)</label><input type="tel" class="form-input" placeholder="(314) 000-0000"/></div>
+          </div>
+          <div class="form-field">
+            <label class="form-lbl">What service interests you?</label>
+            <div class="svc-sel">
+              <label class="svc-opt" onclick="selectSvc(this)"><input type="radio" name="service" value="jumpstart"/><div class="svc-radio"><div class="svc-dot"></div></div><div><div class="svc-name">AI Jumpstart Session</div><div class="svc-sub">Same-day tools delivered</div></div></label>
+              <label class="svc-opt" onclick="selectSvc(this)"><input type="radio" name="service" value="partner"/><div class="svc-radio"><div class="svc-dot"></div></div><div><div class="svc-name">AI Guidance Partner</div><div class="svc-sub">Ongoing support and training</div></div></label>
+              <label class="svc-opt" onclick="selectSvc(this)"><input type="radio" name="service" value="suite"/><div class="svc-radio"><div class="svc-dot"></div></div><div><div class="svc-name">Business AI Suite</div><div class="svc-sub">All 3 agents fully built and deployed</div></div></label>
+              <label class="svc-opt" onclick="selectSvc(this)"><input type="radio" name="service" value="website"/><div class="svc-radio"><div class="svc-dot"></div></div><div><div class="svc-name">Website Design &amp; Development</div><div class="svc-sub">Custom, no templates</div></div></label>
+              <label class="svc-opt" onclick="selectSvc(this)"><input type="radio" name="service" value="automation"/><div class="svc-radio"><div class="svc-dot"></div></div><div><div class="svc-name">Custom Automation Workflows</div><div class="svc-sub">Replace manual processes with smart flows</div></div></label>
+              <label class="svc-opt" onclick="selectSvc(this)"><input type="radio" name="service" value="notsure"/><div class="svc-radio"><div class="svc-dot"></div></div><div><div class="svc-name">Not sure yet — just want to talk</div><div class="svc-sub">Free 30 min consultation, no commitment</div></div></label>
+            </div>
+          </div>
+          <div class="form-field">
+            <label class="form-lbl">Your biggest operational challenge?</label>
+            <textarea class="form-textarea" placeholder="Tell us where you're losing the most time, money, or energy. The more specific, the better we can prepare."></textarea>
+          </div>
+          <button type="submit" class="btn-submit" id="submitBtn">Book My Free Consultation</button>
+          <p class="form-note">No charge. No commitment. Just an honest conversation.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">Nestor Forge</div>
+    <div class="footer-tag">Ancient wisdom. Modern tools. Every small business, unstoppable.</div>
+  </div>
+  <ul class="footer-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#agents">AI Suite</a></li>
+    <li><a href="#how">Process</a></li>
+    <li><a href="#impact">Impact</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="footer-copy">2026 Nestor Forge LLC &nbsp;·&nbsp; St. Louis, Missouri</div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+function switchTab(idx) {
+  document.querySelectorAll('.agent-tab').forEach((t,i) => t.classList.toggle('active', i===idx));
+  document.querySelectorAll('.agent-panel').forEach((p,i) => p.classList.toggle('active', i===idx));
+}
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const open = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!open) item.classList.add('open');
+}
+function selectSvc(label) {
+  document.querySelectorAll('.svc-opt').forEach(el => el.classList.remove('selected'));
+  label.classList.add('selected');
+  label.querySelector('input').checked = true;
+}
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) current = s.id; });
+  navLinks.forEach(a => { a.style.color = a.getAttribute('href') === '#' + current ? 'var(--gold)' : ''; });
+});
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
+  btn.textContent = 'Sending…';
+  btn.disabled  = true;
+  setTimeout(() => { btn.textContent = "Message Sent — We'll be in touch shortly."; btn.style.background='var(--navy-mid)'; }, 1200);
+}
+
+// Hero stat counters
+function animateCounters() {
+  document.querySelectorAll('.hero-stat').forEach((stat, i) => {
+    setTimeout(() => {
+      const el = stat.querySelector('.hero-stat-num');
+      const target = parseInt(el.dataset.target);
+      const isCurrency = el.dataset.format === 'currency';
+      const duration = 1200, steps = 50;
+      let current = 0;
+      const timer = setInterval(() => {
+        current = Math.min(current + target / steps, target);
+        el.textContent = isCurrency ? '$' + Math.round(current).toLocaleString() : Math.round(current);
+        if (current >= target) { clearInterval(timer); stat.classList.add('counted'); }
+      }, duration / steps);
+    }, i * 180);
+  });
+}
+const heroObs = new IntersectionObserver((e) => {
+  if (e[0].isIntersecting) { animateCounters(); heroObs.disconnect(); }
+}, { threshold: 0.3 });
+if (document.getElementById('hero')) heroObs.observe(document.getElementById('hero'));
+
+</script>
+</body>
+</html>
